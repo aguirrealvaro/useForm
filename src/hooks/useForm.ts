@@ -1,10 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-
-type FieldsType = Record<string, string>;
-
-type UseFormParams = {
-  intialValues?: FieldsType;
-};
+import { FieldsType, UseFormParams } from "./types";
 
 type UseFormReturnType = {
   fields: FieldsType;
