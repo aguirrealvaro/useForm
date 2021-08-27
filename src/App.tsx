@@ -11,7 +11,7 @@ export const App: FunctionComponent = () => {
   const onSubmit = () => console.log(fields);
 
   return (
-    <form onSubmit={(e) => handleSubmit(e, onSubmit)}>
+    <Form onSubmit={(e) => handleSubmit(e, onSubmit)}>
       <CustomInput
         inputId="name"
         placeholder="Name"
@@ -27,9 +27,14 @@ export const App: FunctionComponent = () => {
         name="age"
       />
       <button type="submit">Submit</button>
-    </form>
+    </Form>
   );
 };
+
+const Form = styled.form`
+  width: 60%;
+  margin: 4rem auto;
+`;
 
 const CustomInput = styled(InputField)`
   margin-bottom: 1rem;
