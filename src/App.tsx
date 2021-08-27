@@ -1,3 +1,8 @@
 import React, { FunctionComponent } from "react";
+import { InputField } from "@/components";
+import { useForm } from "@/hooks";
 
-export const App: FunctionComponent = () => <h1>Hello world</h1>;
+export const App: FunctionComponent = () => {
+  useForm();
+  return <InputField inputId="123" />;
+};

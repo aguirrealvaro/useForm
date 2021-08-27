@@ -25,7 +25,7 @@ module.exports = {
     "react/prop-types": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
     "import/no-duplicates": "error",
     "import/no-unresolved": "off",
     "import/order": [
