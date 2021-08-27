@@ -35,7 +35,7 @@ export const InputField: FunctionComponent<InputProps> = ({
   disabled = false,
   className,
 }) => {
-  const onValidChange = (e: ChangeEvent<HTMLInputElement & HTMLTextAreaElement>) => {
+  const onValidChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.validity.valid) onChange?.(e);
   };
 
@@ -111,6 +111,7 @@ const Input = styled.input<{ error: boolean }>`
   outline: none;
   border: none;
   background-color: transparent;
+  padding: 0;
   height: 100%;
   top: 0;
   left: 0;
