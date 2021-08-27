@@ -50,7 +50,7 @@ export const App: FunctionComponent = () => {
   return (
     <Form onSubmit={(e) => handleSubmit(e, onSubmit)}>
       <CustomInput
-        inputId="name"
+        id="name"
         placeholder="Name"
         value={fields.name}
         onChange={handleInputChange}
@@ -58,7 +58,7 @@ export const App: FunctionComponent = () => {
         error={errors?.name}
       />
       <CustomInput
-        inputId="password"
+        id="password"
         placeholder="Password"
         value={fields.password}
         onChange={handleInputChange}
@@ -67,7 +67,7 @@ export const App: FunctionComponent = () => {
         type="password"
       />
       <CustomInput
-        inputId="age"
+        id="age"
         placeholder="Age"
         value={fields.age}
         onChange={handleInputChange}

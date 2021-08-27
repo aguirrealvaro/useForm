@@ -11,30 +11,22 @@ const COLORS = {
 };
 
 type InputProps = {
-  inputId: string;
-  value?: string;
-  placeholder?: string;
-  onChange?: HTMLProps<HTMLInputElement>["onChange"];
-  name?: string;
   helpText?: string | JSX.Element;
   error?: string;
-  disabled?: boolean;
-  pattern?: string;
-  type?: HTMLProps<HTMLInputElement>["type"];
   className?: string;
 };
 
-export const InputField: FunctionComponent<InputProps> = ({
-  pattern,
+export const InputField: FunctionComponent<InputProps & HTMLProps<HTMLInputElement>> = ({
+  id,
   placeholder,
-  name,
   value,
   onChange,
-  helpText,
-  inputId,
-  error,
+  name,
+  pattern,
   disabled = false,
   type = "text",
+  helpText,
+  error,
   className,
 }) => {
   const onValidChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +41,6 @@ export const InputField: FunctionComponent<InputProps> = ({
     type,
     pattern,
     disabled,
-    inputId,
     error: !!error,
   };
 
@@ -57,7 +48,7 @@ export const InputField: FunctionComponent<InputProps> = ({
     <div className={className}>
       <InputContainer disabled={disabled} error={!!error}>
         <Input {...inputProps} />
-        <Label htmlFor={inputId}>{placeholder}</Label>
+        <Label htmlFor={id}>{placeholder}</Label>
       </InputContainer>
       {(helpText || error) && <Bottom error={!!error}>{error || helpText}</Bottom>}
     </div>
