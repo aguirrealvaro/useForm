@@ -3,8 +3,14 @@ import styled from "styled-components";
 import { InputField } from "@/components/InputField";
 import { useForm } from "@/hooks";
 
+type Fields = {
+  name: string;
+  password: string;
+  age: string;
+};
+
 export const App: FunctionComponent = () => {
-  const { fields, errors, handleInputChange, handleSubmit } = useForm({
+  const { fields, errors, handleInputChange, handleSubmit } = useForm<Fields>({
     intialValues: { name: "", password: "", age: "" },
     validations: {
       name: {

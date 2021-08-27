@@ -1,9 +1,4 @@
-export type FieldsType = Record<string, string>;
-
-export type UseFormParams = {
-  intialValues?: FieldsType;
-  validations?: Record<string, ValidationType>;
-};
+export type ErrorsType<T> = Partial<Record<keyof T, string>>;
 
 export type ValidationType = {
   required?: {

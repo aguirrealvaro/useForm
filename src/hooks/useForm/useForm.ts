@@ -1,18 +1,24 @@
 import React, { ChangeEvent, useState } from "react";
-import { FieldsType, UseFormParams } from "./types";
+import { ErrorsType, ValidationType } from "./types";
 
-type ErrorsType = Record<string, string>;
+type UseFormParams<T> = {
+  intialValues?: T;
+  validations?: Record<keyof T, ValidationType>;
+};
 
-type UseFormReturnType = {
-  fields: FieldsType;
-  errors: ErrorsType | undefined;
+type UseFormReturnType<T> = {
+  fields: T;
+  errors: ErrorsType<T> | undefined;
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>, onSubmit: () => void) => void;
 };
 
-export const useForm = ({ intialValues, validations }: UseFormParams): UseFormReturnType => {
-  const [fields, setFields] = useState<FieldsType>(intialValues || {});
-  const [errors, setErrors] = useState<ErrorsType | undefined>(undefined);
+export const useForm = <T extends Record<keyof T, string>>({
+  intialValues,
+  validations,
+}: UseFormParams<T>): UseFormReturnType<T> => {
+  const [fields, setFields] = useState<T>((intialValues || {}) as T);
+  const [errors, setErrors] = useState<ErrorsType<T> | undefined>(undefined);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -23,7 +29,7 @@ export const useForm = ({ intialValues, validations }: UseFormParams): UseFormRe
     e.preventDefault();
 
     let valid = true;
-    const newErrors: Record<string, string> = {};
+    const newErrors: ErrorsType<T> = {};
     if (validations) {
       for (const key in validations) {
         const value = fields[key];
