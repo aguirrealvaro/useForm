@@ -140,6 +140,7 @@ const Input = styled.input<{ error: boolean }>`
 `;
 
 const Bottom = styled.div<{ error: boolean }>`
+  font-family: "Arial";
   font-size: 13px;
   margin: 0.5rem 1rem 0 1rem;
   color: ${({ error }) => COLORS[error ? "red" : "grey"]};

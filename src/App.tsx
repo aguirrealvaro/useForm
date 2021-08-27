@@ -4,11 +4,42 @@ import { InputField } from "@/components/InputField";
 import { useForm } from "@/hooks";
 
 export const App: FunctionComponent = () => {
-  const { fields, handleInputChange, handleSubmit } = useForm({
-    intialValues: { name: "", age: "" },
+  const { fields, errors, handleInputChange, handleSubmit } = useForm({
+    intialValues: { name: "", password: "", age: "" },
+    validations: {
+      name: {
+        required: {
+          value: true,
+          message: "Required field",
+        },
+        pattern: {
+          value: "^[A-Za-z]*$",
+          message: "Only letters",
+        },
+      },
+      age: {
+        custom: {
+          isValid: (value) => parseInt(value) >= 18,
+          message: "You have to be at least 18 years old.",
+        },
+      },
+      password: {
+        required: {
+          value: true,
+          message: "Required field",
+        },
+        custom: {
+          isValid: (value) => value.length > 6,
+          message: "The password needs to be larger than 6",
+        },
+      },
+    },
   });
 
-  const onSubmit = () => console.log(fields);
+  const onSubmit = () => {
+    console.log("On submit");
+    console.log(fields);
+  };
 
   return (
     <Form onSubmit={(e) => handleSubmit(e, onSubmit)}>
@@ -18,6 +49,15 @@ export const App: FunctionComponent = () => {
         value={fields.name}
         onChange={handleInputChange}
         name="name"
+        error={errors?.name}
+      />
+      <CustomInput
+        inputId="password"
+        placeholder="Password"
+        value={fields.password}
+        onChange={handleInputChange}
+        name="password"
+        error={errors?.password}
       />
       <CustomInput
         inputId="age"
@@ -25,6 +65,7 @@ export const App: FunctionComponent = () => {
         value={fields.age}
         onChange={handleInputChange}
         name="age"
+        error={errors?.age}
       />
       <button type="submit">Submit</button>
     </Form>
