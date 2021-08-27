@@ -4,5 +4,5 @@ import { useForm } from "@/hooks";
 
 export const App: FunctionComponent = () => {
   useForm();
-  return <InputField inputId="123" />;
+  return <InputField inputId="123" placeholder="Placeholder" />;
 };
