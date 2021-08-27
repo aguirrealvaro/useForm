@@ -20,6 +20,7 @@ type InputProps = {
   error?: string;
   disabled?: boolean;
   pattern?: string;
+  type?: HTMLProps<HTMLInputElement>["type"];
   className?: string;
 };
 
@@ -33,6 +34,7 @@ export const InputField: FunctionComponent<InputProps> = ({
   inputId,
   error,
   disabled = false,
+  type = "text",
   className,
 }) => {
   const onValidChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +46,7 @@ export const InputField: FunctionComponent<InputProps> = ({
     value,
     onChange: onValidChange,
     name,
-    type: "text",
+    type,
     pattern,
     disabled,
     inputId,

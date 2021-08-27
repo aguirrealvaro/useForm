@@ -35,8 +35,8 @@ export const App: FunctionComponent = () => {
           message: "Required field",
         },
         custom: {
-          isValid: (value) => value.length > 6,
-          message: "The password needs to be larger than 6",
+          isValid: (value) => value.length >= 4,
+          message: "The password needs to be larger than 4",
         },
       },
     },
@@ -64,6 +64,7 @@ export const App: FunctionComponent = () => {
         onChange={handleInputChange}
         name="password"
         error={errors?.password}
+        type="password"
       />
       <CustomInput
         inputId="age"
