@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import { ErrorsType, ValidationType } from "./types";
 
 type UseFormParams<T> = {
-  intialValues?: T;
+  intialValues: T;
   validations?: Record<keyof T, ValidationType>;
 };
 
@@ -11,13 +11,14 @@ type UseFormReturnType<T> = {
   errors: ErrorsType<T> | undefined;
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>, onSubmit: () => void) => void;
+  resetFields: () => void;
 };
 
 export const useForm = <T extends Record<keyof T, string>>({
   intialValues,
   validations,
 }: UseFormParams<T>): UseFormReturnType<T> => {
-  const [fields, setFields] = useState<T>((intialValues || {}) as T);
+  const [fields, setFields] = useState<T>(intialValues);
   const [errors, setErrors] = useState<ErrorsType<T> | undefined>(undefined);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +26,7 @@ export const useForm = <T extends Record<keyof T, string>>({
     setFields({ ...fields, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>, onSubmit?: () => void) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>, onSubmit: () => void) => {
     e.preventDefault();
 
     let valid = true;
@@ -59,8 +60,10 @@ export const useForm = <T extends Record<keyof T, string>>({
     }
 
     setErrors(undefined);
-    onSubmit?.();
+    onSubmit();
   };
 
-  return { fields, errors, handleInputChange, handleSubmit };
+  const resetFields = () => setFields(intialValues);
+
+  return { fields, errors, handleInputChange, handleSubmit, resetFields };
 };
