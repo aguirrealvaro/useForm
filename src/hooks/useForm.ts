@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
-import { ErrorsType, ValidationType } from "./types";
+import { ChangeEvent, useState } from "react";
 
 type UseFormParams<T> = {
   intialValues: T;
@@ -12,6 +11,23 @@ type UseFormReturnType<T> = {
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>, onSubmit: () => void) => void;
   resetFields: () => void;
+};
+
+type ErrorsType<T> = Partial<Record<keyof T, string>>;
+
+type ValidationType = {
+  required?: {
+    value: boolean;
+    message: string;
+  };
+  pattern?: {
+    value: RegExp;
+    message: string;
+  };
+  custom?: {
+    isValid: (value: string) => boolean;
+    message: string;
+  };
 };
 
 export const useForm = <T extends Record<keyof T, string>>({

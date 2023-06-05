@@ -19,7 +19,7 @@ export const App: FunctionComponent = () => {
           message: "Required field",
         },
         pattern: {
-          value: "^[A-Za-z]*$",
+          value: /^[A-Za-z]*$/,
           message: "Only letters",
         },
       },
